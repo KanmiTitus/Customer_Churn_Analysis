@@ -13,7 +13,6 @@ FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_d
 SELECT Customer_Status,
        COUNT(Customer_Status) AS customer_count,
        ROUND(COUNT(Customer_Status) * 100 / SUM(COUNT(Customer_Status)) OVER(), 1) AS status_percent
-
  FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
  GROUP BY Customer_Status
  ORDER BY status_percent DESC
@@ -27,7 +26,6 @@ SELECT Customer_Status,
 SELECT Internet_Service,
        COUNT(Internet_Service) AS churn_count,
        ROUND(COUNT(Internet_Service) * 100 / SUM(COUNT(Internet_Service)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Internet_Service
@@ -39,7 +37,6 @@ ORDER BY churn_percentage DESC
 
 SELECT Online_Security,
        ROUND(COUNT(Online_Security) * 100 / SUM(COUNT(Online_Security)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Online_Security
@@ -51,7 +48,6 @@ ORDER BY churn_percentage  DESC
 
 SELECT Streaming_TV,
        ROUND(COUNT(Streaming_TV) * 100 / SUM(COUNT(Streaming_TV)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Streaming_TV
@@ -63,7 +59,6 @@ ORDER BY churn_percentage  DESC
 
 SELECT Streaming_Music,
        ROUND(COUNT(Streaming_Music) * 100 / SUM(COUNT(Streaming_Music)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Streaming_Music
@@ -75,9 +70,7 @@ ORDER BY churn_percentage  DESC
 
 SELECT Streaming_Movies,
        ROUND(COUNT(Streaming_Movies) * 100 / SUM(COUNT(Streaming_Movies)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
-
 WHERE Customer_Status = "Churned"
 GROUP BY Streaming_Movies
 ORDER BY churn_percentage  DESC
@@ -88,7 +81,6 @@ ORDER BY churn_percentage  DESC
 
 SELECT Device_Protection_Plan,
        ROUND(COUNT(Device_Protection_Plan) * 100 / SUM(COUNT(Device_Protection_Plan)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Device_Protection_Plan
@@ -100,7 +92,6 @@ ORDER BY churn_percentage  DESC
 
 SELECT Internet_Type,
        ROUND(COUNT(Internet_Type) * 100 / SUM(COUNT(Internet_Type)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Internet_Type
@@ -112,7 +103,6 @@ ORDER BY churn_percentage DESC
 
 SELECT Premium_Tech_Support,
        ROUND(COUNT(Premium_Tech_Support) * 100 / SUM(COUNT(Premium_Tech_Support)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Premium_Tech_Support
@@ -125,7 +115,6 @@ ORDER BY churn_percentage  DESC
 SELECT Contract,
        COUNT(*) AS churn_count,
        ROUND(COUNT(Customer_ID) * 100 / SUM(COUNT(Customer_ID)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Contract
@@ -137,7 +126,6 @@ ORDER BY churn_percentage  DESC
 
 SELECT Offer,
        ROUND(COUNT(Customer_ID) * 100 / SUM(COUNT(Customer_ID)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Offer
@@ -155,7 +143,6 @@ ORDER BY churn_percentage DESC
 SELECT City,
        COUNT(*) AS churn_customers_no,
        ROUND(COUNT(City) * 100 / SUM(COUNT(City)) OVER(), 1) AS percentage_churned
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned" 
 GROUP BY City
@@ -176,7 +163,6 @@ WITH churn_data as (
         WHEN Tenure_in_Months  <= 36 THEN "3 Years"
         ELSE "> 3 Years "
         END AS Tenure,
-        
  FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data` AS customerchurn_data
  WHERE Customer_Status = "Churned"
 )
@@ -185,7 +171,6 @@ WITH churn_data as (
 
 SELECT churn_data.Tenure,
      ROUND(COUNT(churn_data.Customer_ID) * 100 / SUM(COUNT(churn_data.Customer_ID)) OVER(),1) AS Percentage_Churned
-
    FROM churn_data
    GROUP BY churn_data.Tenure
    ORDER BY Percentage_Churned DESC
@@ -197,7 +182,6 @@ SELECT churn_data.Tenure,
 SELECT Customer_Status,
        ROUND(SUM(Total_Revenue),0) AS revenue_per_status,
        ROUND(SUM(Total_Revenue) * 100 / SUM(SUM(Total_Revenue)) OVER(), 1) AS Revenue_percentage  
-
  FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
  GROUP BY Customer_Status
 
@@ -211,7 +195,6 @@ SELECT Customer_Status,
 SELECT Churn_Category,
        ROUND(SUM(Total_Revenue), 0) AS churned_revenue,
        ROUND(COUNT(Customer_ID) * 100 / SUM(COUNT(Customer_ID)) OVER(), 1) AS churn_percentage 
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Churn_Category 
@@ -224,7 +207,6 @@ ORDER BY churn_percentage DESC
 SELECT Churn_Category,
        Churn_Reason,
        ROUND(COUNT(Customer_ID) * 100 / SUM(COUNT(Customer_ID)) OVER(),1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Churn_Category,
@@ -239,7 +221,6 @@ GROUP BY Churn_Category,
 SELECT Internet_Type,
        Churn_Category,
        ROUND(COUNT(Customer_ID) * 100 / SUM(COUNT(Customer_ID)) OVER(),1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
      AND Churn_Category = "Competitor"
@@ -256,16 +237,13 @@ GROUP BY  Churn_Category,
 
 WITH high_value_data as (
   SELECT *
-
   FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
   WHERE Tenure_in_Months >= 12 AND 
-
         Monthly_Charge >= 
         (
     SELECT (PERCENTILE_DISC(Monthly_Charge, 0.5)OVER())
     FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
     LIMIT 1
-  
   )
    AND
         Number_of_Referrals >0
@@ -275,7 +253,6 @@ WITH high_value_data as (
 SELECT high_value_data.Customer_Status,
        COUNT(*) AS no_customer,
        ROUND(COUNT(high_value_data.Customer_Status) * 100 / SUM(COUNT(high_value_data.Customer_Status)) OVER(),1) AS customer_percent
-
 FROM high_value_data
 GROUP BY high_value_data.Customer_Status
 ORDER BY customer_percent DESC
@@ -295,7 +272,6 @@ ORDER BY customer_percent DESC
           END AS Risk_Level,
           COUNT(Customer_ID) AS customer_count,
           ROUND(COUNT(Customer_ID) * 100 / SUM(COUNT(Customer_ID)) OVER(),1) AS risk_percent
-
       FROM 
           (
             SELECT Customer_ID,
@@ -342,7 +318,6 @@ SELECT
        WHEN Age >= 51 THEN 'Old_Age'
        END AS Age_Group,
        ROUND(COUNT(Age) * 100 / SUM(COUNT(Age)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Age_Group
@@ -354,7 +329,6 @@ ORDER BY churn_percentage  DESC
 
 SELECT Gender,
        ROUND(COUNT(Gender) * 100 / SUM(COUNT(Gender)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Gender
@@ -366,7 +340,6 @@ ORDER BY churn_percentage  DESC
 
 SELECT Married,
        ROUND(COUNT(Married) * 100 / SUM(COUNT(Married)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Married
@@ -382,7 +355,6 @@ SELECT
         ELSE 'No'
         END AS Dependents,
 ROUND(COUNT(Number_of_Dependents) * 100 / SUM(COUNT(Number_of_Dependents)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Dependents
@@ -398,7 +370,6 @@ SELECT
        ELSE 'No'
        END AS Referral,
        ROUND(COUNT(Number_of_Referrals) * 100 / SUM(COUNT(Number_of_Referrals)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Referral
@@ -410,7 +381,6 @@ ORDER BY churn_percentage  DESC
 
 SELECT Phone_Service,
        ROUND(COUNT(Phone_Service) * 100 / SUM(COUNT(Phone_Service)) OVER(), 1) AS churn_percentage
-
 FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
 WHERE Customer_Status = "Churned"
 GROUP BY Phone_Service
