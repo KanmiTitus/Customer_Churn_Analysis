@@ -3,7 +3,6 @@
    -- Querying database to validate the metadata in the data dictionary to make sure of
       data completeness, accuracy, consistency and overall data integrity.        */
    
-   
    -- Checking for duplicate records --  
 
 SELECT Customer_ID,
@@ -119,20 +118,14 @@ WITH Total_Revenue_Check AS
 (
 SELECT Customer_ID, Total_Revenue,
 ROUND(Total_Charges + Total_Extra_Data_Charges + Total_Long_Distance_Charges - Total_Refunds,2)  AS Total_Revenue_2
-
   FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
-
   GROUP BY Customer_ID, Total_Revenue, Total_Charges,Total_Extra_Data_Charges,Total_Long_Distance_Charges,Total_Refunds
 ) 
-
 SELECT churndata.Total_Revenue,
        Total_Revenue_Check.Total_Revenue_2
-
 FROM Total_Revenue_Check
-
  INNER JOIN `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data` AS churndata
  ON Total_Revenue_Check.Customer_ID = churndata.Customer_ID
-
 WHERE Total_Revenue_Check.Total_Revenue_2 != churndata.Total_Revenue
   
   
