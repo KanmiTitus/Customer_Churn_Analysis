@@ -1,9 +1,10 @@
-/* -- Data Cleaning Maven Telecommunication Dataset 
+/* -- Data Cleaning, cleaning Maven Telecommunication Dataset 
 
-   -- Querying to validate the detailed data dictionary to make sure of data integrity,
-   completeness,accuracy and data consistency.
+   -- Querying database to validate the metadata in the data dictionary to make sure of
+      data completeness, accuracy, consistency and overall data integrity.        */
    
-   __ Checking for duplicate records --  */
+   
+   -- Checking for duplicate records --  
 
 SELECT Customer_ID,
        COUNT(Customer_ID)
@@ -13,7 +14,7 @@ SELECT Customer_ID,
  
  
  
- -- validating we only have two Gender type as data dictionary --
+ --  validating we only have two genders type in the Gender column  --
 
 SELECT DISTINCT Gender
  FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data` 
@@ -34,7 +35,7 @@ SELECT DISTINCT Contract
   
   
   
-  -- validating data entries in phone service column --
+  -- validating data entries in Phone Service column --
 
 SELECT DISTINCT Phone_Service
   FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data`
@@ -47,7 +48,8 @@ SELECT DISTINCT Offer
  FROM `customer-churn-analysis-381016.maven_telecomm_data.telecom_customerchurn_data` 
  
  
- /*-- validating data entries Multiple_lines column --
+ 
+ /*-- validating data entries in  Multiple Lines column --
  
  IS NULL is one of the distincts input in multiple line column, need to update all NULL values to "No",
  since customer don't subcribe for phone service  */
